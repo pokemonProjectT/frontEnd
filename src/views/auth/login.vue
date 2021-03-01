@@ -25,7 +25,7 @@
 
 <script>
 import user from '../../composables/auth/user'
-
+import router from "../../router/index";
 export default {
 name:"Login",
 setup() {
@@ -40,8 +40,14 @@ const {login} =  user()
 const checkForm=  (e)=> {
       e.preventDefault();
       login(initialState).then(res=>{
-          console.log(res);
-         })
+       
+         localStorage.setItem('userConnected', JSON.stringify(res))
+       router.push({ path: '/' })
+         }).catch(err=>{
+           alert('wrong email or password')
+           router.push({ path: '/login' })
+           console.log(err);
+         }) 
    console.log("finish");
     }
  return {

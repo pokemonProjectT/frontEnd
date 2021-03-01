@@ -13,7 +13,6 @@ name:"PokemonDetails",
 
 setup(){
     const route = useRoute();
-    // Now you can access params like:
     console.log(route.params.id);
 }
 }

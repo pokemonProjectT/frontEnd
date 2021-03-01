@@ -15,7 +15,8 @@ const user = () => {
 
     }
     const login = async(user) => {
-        await fetch(`${GENERATOR_BASE}/users/auth/login`, {
+
+        const connectedUser = await fetch(`${GENERATOR_BASE}/users/auth/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -23,7 +24,8 @@ const user = () => {
             },
             body: JSON.stringify(user)
         });
-
+        const content = await connectedUser.json();
+        return content
     }
 
     return { addUser, login }

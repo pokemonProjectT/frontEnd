@@ -1,6 +1,6 @@
 <template>
     <div>
- <h1>Add Pokemon</h1>
+ <h1>Update Pokemon</h1>
  <div class="card col-md-6">
   <div class="card-body">
     <form id="app"
@@ -28,7 +28,7 @@ import addPokemon from '../composables/addPokemon'
 import { reactive } from "vue";
 
 export default {
-name:"AddPokemon",
+name:"UpdatePokemon",
 
 setup() {
    

@@ -29,6 +29,7 @@
 
 <script>
 import user from '../../composables/auth/user'
+import router from "../../router/index";
 
 export default {
 name:"Register",
@@ -46,7 +47,7 @@ const {addUser} =  user()
 const checkForm=  (e)=> {
       e.preventDefault();
       addUser(initialState).then(()=>{
-          console.log("poke");
+          router.push({ path: '/login' })
          })
    console.log("finish");
     }

@@ -1,7 +1,11 @@
-<template>
+<template >
   <div>
        <h1>pokemos list</h1>
-  <table class="table table-striped">
+       <div v-if="!pokemonList || !pokemonList.length">
+         <button  type="button" class="btn btn-success" v-on:click="addToDb()">getPokemons</button>
+       </div>
+       <div v-if="pokemonList">
+ <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -16,10 +20,9 @@
       <td>{{ pokemon.name }}</td>
       <td>{{ pokemon.url }}</td>
       <td>
-       <router-link :to="{ name: 'Details', params: {id: pokemon._id } }">details</router-link>
-          <button type="button" class="btn btn-warning" >update</button>
-         <button type="button" class="btn btn-danger" >delete</button>
-         
+       <router-link :to="{ name: 'Details', params: {id: pokemon._id } }"> <button type="button" class="btn btn-primary" >details</button></router-link>
+       <router-link :to="{ name: 'Update', params: {id: pokemon._id } }"> <button type="button" class="btn btn-warning" >update</button></router-link>
+         <button type="button" class="btn btn-danger" v-on:click="deleteP(pokemon._id)" >delete</button>
          </td>
     
     </tr>
@@ -27,15 +30,39 @@
  
   </tbody>
 </table>
+       </div>
+ 
  
   </div>
 </template>
 
 <script>
-
+import deletePokemon from '../composables/deletePokemon'
+import getPokemons from '../composables/getPokemons'
 export default {
 name:"PokemonList",
-props: ["pokemonList"]
+props: ["pokemonList"],
+setup(){
+const {deletePokemonById} =  deletePokemon();
+const {addPokemonToDb} =  getPokemons()
+ const deleteP= (e)=> {
+  deletePokemonById(e).then(()=>{
+    alert("are you sure to delete")
+    location.reload()
+  })
+    }
+    const addToDb = ()=>{
+      addPokemonToDb().then(()=>{
+        location.reload()
+      })
+    }
+ return {
+deletePokemonById,
+deleteP,
+addPokemonToDb,
+addToDb
+ }
+}
 }
 </script>
 
