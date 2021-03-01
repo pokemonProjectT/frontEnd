@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <AddPokemon/>
+   <PokemonList :pokemonList="pokemonList"/>
+   
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
+import getPokemons from '../composables/getPokemons'
+import PokemonList from '../components/pokemonList'
+import AddPokemon from '../components/addPokemon'
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  components :{
+PokemonList,
+AddPokemon
+  },
+    setup() {
+ const {pokemonList,getPokemonList} =  getPokemons()
+ getPokemonList()
+    return {
+      pokemonList
+    }
   }
+
+
+ 
 }
 </script>
+
+
+<style scoped>
+
+</style>
